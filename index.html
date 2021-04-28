@@ -111,6 +111,7 @@
          var data = imageData.data;
          
          for(var i = 0, n = data.length; i < n; i += 4) {
+         
           data[[i] = 0;
           data[i + 1] = 0; 
          }
@@ -133,6 +134,7 @@
   }); // end of the fileInput.addEventListener function
  } // end of the window.onload function
  </script>
+ 
  </head>
 
  <body>
@@ -141,13 +143,14 @@
      
     <h1>Primary Colors</h1></div><!-- /header -->
     <div data-role="content">	
-      <h2>Push button to take picture.</h2>
+    
+     <h2>Push button to take picture.</h2>
       <div>
         Press orange button to create or choose image file:
         <input type="file" id="fileInput" STYLE="background-color: #FF6600;">
       </div>
-      <div id="messageDisplayArea">
-     </div>
+     
+      <div id="messageDisplayArea"></div>
       
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
       <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
