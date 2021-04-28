@@ -25,10 +25,12 @@
   http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
   
   Brief Description of Goal of Code:
-  blah, blah, blah,
+ The goal of this code is to load an image on two canvases. In the first canvas the image shoould be unaltered with no changes. 
+ The image in the second canvas will siplay the same image, but it will be blue. 
  
   Known Issues:
-  blah, blah, blah, blah
+  could not get an image ot load on my canvas but that got fixed with a spelling error
+  This app should enable anyone to upload an image and create a better visualiztion of an image. 
 -->
 
  <head>
@@ -40,6 +42,7 @@
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
   
+  <!--beginning of the script-->
   <script>
   var docMod = document.lastModified; // gets last modified date and time of the index.html file
   console.log("This file last modified  " + docMod); // displays last modified date and time in the javascipt browser console 
@@ -86,12 +89,13 @@
   
  
   fileInput.addEventListener('change', function(e) {
+  /*this function^ looks for any changes in the <input> tag, which specifies that the user has selected a file containing an image*/
     var file = fileInput.files[0];
     var imageType = /image.*/;
    
-    
+    /* this code checks that the selected file is an image*/
     if (file.type.match(imageType)) {
-      
+      /*this variable reads the file being uploaded*/
       var reader = new FileReader();
      
      //start reader.onload function (property contains an event handler executed when the load event is fired)
@@ -101,8 +105,9 @@
         messageDisplayArea.innerHTML = "You picked an image!";
         /* new Image() and img.onload start some kind of new image creation process in javaScript. I do not understand why this is necessary although it may simply slow things down to let the image load. */
         
-       var img = new Image();
-        img.onload = function() {
+       var img = new Image(); //setting image as a variable
+        img.onload = function() { //draws and prints the image on the first canvas 
+          //sets the dimensions for the loaded image
           drawImageIOSFix(context,img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500);
 
           /*  +++++++++++++++ BEGIN IMAGE PROCESSING +++++++++++++++ */
@@ -110,18 +115,19 @@
 
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
           
-         var canvas2 = document.getElementById('myCanvas2');
+         var canvas2 = document.getElementById('myCanvas2');//code for the blue canvas in the second canvas
          var context2 = canvas2.getContext("2d");
          
          var imageData = context.getImageData(0, 0, 600, 500);
-         var data = imageData.data;
+         var data = imageData.data;//this code represents the pixel data of an area of a canvas object
          
-         for(var i = 0, n = data.length; i < n; i += 4) {
+         for(var i = 0, n = data.length; i < n; i += 4) {//code for changing the image blue
          
-          data[i] = 0;
-          data[i + 1] = 0; 
+          data[i] = 0;//data for green intensity is set to zero
+          data[i + 1] = 0;//data for red intensity is set to zero
          }
-         
+        
+         //a code that applies all functions to the image that will be displayed on the second cnavas
          context2.putImageData(imageData, 0, 0);
           
           
@@ -140,40 +146,45 @@
   }); // end of the fileInput.addEventListener function
  } // end of the window.onload function
  </script>
- 
+ <!--end of script-->
  </head>
 
  <body>
   <div data-role="page">
     <div data-role="header">
      
+   
     <h1>Primary Colors</h1></div><!-- /header -->
     <div data-role="content">	
     
+     <!--the header text will be appeared on the content space below the main header and above the button-->
      <h2>Push button to take picture.</h2>
       <div>
+       <!--this code only allows an image file to be loaded-->
         Press orange button to create or choose image file:
         <input type="file" id="fileInput" STYLE="background-color: #FF6600;">
       </div>
      
       <div id="messageDisplayArea"></div>
       
+     <!--HTML and script code for setting up the first canvas page. This first canvas will display the original and unaltered image-->
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
       <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
-        var canvas = document.getElementById('myCanvas');
-        var context = canvas.getContext("2d");
-        context.font = '20pt Calibri';
-        context.fillStyle = "black";
-        context.fillText("Original image will go here", 10, 20);
+        var canvas = document.getElementById('myCanvas'); //calling 'myCanvas' and saving it to the canvas variable
+        var context = canvas.getContext("2d"); //provides context for the drawing surface of a <canvas> element
+        context.font = '20pt Calibri'; //font style
+        context.fillStyle = "black"; //text fill color
+        context.fillText("Original image will go here", 10, 20); //coordinates of the image 
      </script>
        
+     <!--HTML and script code for setting up the second canvas. This second canvas will display the same image in blue-->
         <canvas id="myCanvas2" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
        <script>
-        var canvas2 = document.getElementById('myCanvas2');
-        var context2 = canvas2.getContext("2d");
-        context2.font = '20pt Calibri';
-        context2.fillStyle = "black";
-        context2.fillText("colored image will go here", 10,20);
+        var canvas2 = document.getElementById('myCanvas2'); //calling 'myCanvas2' from the HTML code and saving it to the canvas variable
+        var context2 = canvas2.getContext("2d"); //provides context for drawing surface of a <canvas> element
+        context2.font = '20pt Calibri'; //text font
+        context2.fillStyle = "black"; //text color
+        context2.fillText("colored image will go here", 10,20); //coordinates of the second image
       </script>
 
     </div><!-- /content -->
