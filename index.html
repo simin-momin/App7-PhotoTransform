@@ -137,6 +137,7 @@
  <body>
   <div data-role="page">
     <div data-role="header">
+     
     <h1>Primary Colors</h1></div><!-- /header -->
     <div data-role="content">	
       <h2>Push button to take picture.</h2>
@@ -144,25 +145,25 @@
         Press orange button to create or choose image file:
         <input type="file" id="fileInput" STYLE="background-color: #FF6600;">
       </div>
-      <div id="messageDisplayArea"></div>
+      <div id="messageDisplayArea">
+     </div>
       
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-     
-      <canvas id="myCanvas2" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-     
       <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext("2d");
         context.font = '20pt Calibri';
         context.fillStyle = "black";
         context.fillText("Original image will go here", 10, 20);
+     </script>
        
+        <canvas id="myCanvas2" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
+       <script>
         var canvas2 = document.getElementById('myCanvas2');
         var context2 = canvas2.getContext("2d");
         context2.font = '20pt Calibri';
         context2.fillStyle = "black";
         context2.fillText("colored image will go here", 10,20);
-       
       </script>
 
     </div><!-- /content -->
